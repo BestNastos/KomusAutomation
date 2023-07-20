@@ -1,0 +1,5 @@
+pages\searchautocomplete\SearchAutoCompletePage.class
+сonfiguration\InitDriver.class
+pages\main\MainPage.class
+сonfiguration\ConfigProperties.class
+pages\cart\CartPage.class
