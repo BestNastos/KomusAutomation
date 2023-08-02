@@ -1,5 +1,6 @@
 package pages.cart;
 
+import org.openqa.selenium.support.PageFactory;
 import сonfiguration.ConfigProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ public class CartPage {
 
     public CartPage(WebDriver driver){
         this.driver = driver;
+        PageFactory.initElements(driver, this);
         this.actions = new Actions(driver);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(Long
                 .parseLong(ConfigProperties

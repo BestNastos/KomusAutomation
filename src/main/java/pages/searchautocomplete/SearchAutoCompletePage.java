@@ -1,5 +1,6 @@
 package pages.searchautocomplete;
 
+import org.openqa.selenium.support.PageFactory;
 import pages.main.MainPage;
 import сonfiguration.ConfigProperties;
 import org.openqa.selenium.WebDriver;
@@ -17,14 +18,16 @@ public class SearchAutoCompletePage {
 
     public SearchAutoCompletePage(WebDriver driver){
         this.driver = driver;
+        PageFactory.initElements(driver, this);
         this.actions = new Actions(driver);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(Long
-                .parseLong(ConfigProperties
-                        .getProperty("login.page.time_out"))));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(Long
+//                .parseLong(ConfigProperties
+//                        .getProperty("login.page.time_out"))));
     }
 
 
-    @FindBy(xpath = "//li[contains(@class, \"autocomplete-card\")][1]")
+    @FindBy(xpath = "//button[contains(@class, 'autocomplete-card__btn')]")
     public WebElement buttonToCart;
 
     @FindBy(xpath = "//*[@id=\"ui-id-231\"]/button")

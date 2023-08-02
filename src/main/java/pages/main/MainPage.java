@@ -1,15 +1,9 @@
 package pages.main;
 
-import org.openqa.selenium.support.PageFactory;
-import сonfiguration.ConfigProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import org.openqa.selenium.support.PageFactory;
 // https://testrail.komus.net/index.php?/cases/view/1912956
 // ТОДО
 // инициализировать драйвер
@@ -17,16 +11,14 @@ import java.time.Duration;
 // Прочитать статью
 
 public class MainPage {
-    private final WebDriver driver;
-    private final Actions actions;
-    private final WebDriverWait wait;
+
+    protected WebDriver driver;
+
 
 
     public MainPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        this.actions = new Actions(driver);
-        this.wait = new WebDriverWait(driver, Duration.ofMillis(Long.parseLong(ConfigProperties.getProperty("login.page.time_out"))));
         }
 
 
@@ -37,24 +29,6 @@ public class MainPage {
     private WebElement acceptRegion;
 
 
-
-
-//    public void setSearchInput(Actions actions, WebElement element){
-//        actions.moveToElement(element).click().build().perform();
-//        actions.sendKeys("карандаш");
-//    }
-
-
-
-    public void waitElementShouldBeClick(WebDriverWait wait, WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    public void acceptRegion() {
-        waitElementShouldBeClick(wait, acceptRegion);
-        clickElements(acceptRegion);
-    }
-
     public void clickElements(WebElement element){
         element.click();
     }
@@ -64,8 +38,9 @@ public class MainPage {
 
     }
 
-    public void clickElement(){
+    public MainPage clickElement(){
         clickElements(searchInput);
+        return new MainPage(driver);
     }
     public void setTextToSearchField(){
         setTextToSearchFields(searchInput);
