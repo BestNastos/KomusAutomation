@@ -26,9 +26,9 @@ public class SearchAutoCompletePage {
     private WebElement buttonInCart;
 
 
-    public void clickButtonElement(){
-        mainPage.clickElements(buttonToCart);
-    }
+//    public void clickButtonElement(){
+//        mainPage.clickElements(buttonToCart);
+//    }
 
     public String moveToElementAndClick(){
         Actions actions = new Actions(driver);
