@@ -1,31 +1,32 @@
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import сonfiguration.ConfigProperties;
-
 import java.time.Duration;
 
 public class BaseTestClass {
 
-    public static WebDriver driver;
-    public static ConfigProperties configProperties;
+    public WebDriver driver;
+//    public static ConfigProperties configProperties;
 
-    @BeforeAll
-    public static void setup() {
+    @BeforeEach
+    public void setup() throws WebDriverException {
         //определение пути до драйвера и его настройка
-        System.setProperty("webdriver.chrome.driver", ConfigProperties.getProperty("chromedriver"));
+        WebDriverManager.chromedriver().setup();
         //создание экземпляра драйвера
         driver = new ChromeDriver();
         //окно разворачивается на полный экран
         driver.manage().window().maximize();
         //получение ссылки на страницу входа из файла настроек
         driver.get(ConfigProperties.getProperty("loginpages"));
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @AfterAll
-    public static void shotDown() {
+    @AfterEach
+    public void shotDown() {
 
         driver.close();
 
