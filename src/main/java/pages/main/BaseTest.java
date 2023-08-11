@@ -1,18 +1,18 @@
+package pages.main;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeSuite;
 import сonfiguration.ConfigProperties;
 import java.time.Duration;
 
-public class BaseTestClass {
-
+public class BaseTest {
     public WebDriver driver;
-//    public static ConfigProperties configProperties;
 
-    @BeforeEach
+    @BeforeSuite(alwaysRun = true)
     public void setup() throws WebDriverException {
         //определение пути до драйвера и его настройка
         WebDriverManager.chromedriver().setup();
@@ -25,8 +25,8 @@ public class BaseTestClass {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @AfterEach
-    public void shotDown() {
+    @AfterMethod(alwaysRun = true)
+    public void shutDown() {
 
         driver.close();
 
